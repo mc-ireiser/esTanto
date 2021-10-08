@@ -1,0 +1,30 @@
+$base-theme: Default;
+$skin-name: test;
+
+$border-radius: 1.25rem;
+
+$accent: #28bfba;
+$info: #3dbfe6;
+$success: #7fbf4b;
+$warning: #ffb752;
+$error: #e35d59;
+
+$text-color: #656565;
+$bg-color: #ffffff;
+$base-text: #656565;
+$base-bg: #f6f6f6;
+
+$hovered-text: #1eb97b;
+$hovered-bg: #eeeff0;
+
+$selected-text: #ffffff;
+$selected-bg: #28bfba;
+
+$series-a: #28bfba;
+$series-b: #ffd246;
+$series-c: #78d237;
+$series-d: #28b4c8;
+$series-e: #2d73f5;
+$series-f: #aa46be;
+
+@import "~@nativescript/theme/index";
