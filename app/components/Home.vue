@@ -29,13 +29,14 @@
               horizontalAlignment="center"
             />
             <StackLayout class="currency-tag">
-              <Label text="USD" class="currency" textWrap="true" />
+              <Label :text="from" class="currency" textWrap="true" />
             </StackLayout>
           </StackLayout>
           <StackLayout
             col="1"
             horizontalAlignment="center"
             verticalAlignment="bottom"
+            @tap="changeConversionOrder()"
           >
             <Label>
               <FormattedString>
@@ -51,12 +52,12 @@
               horizontalAlignment="center"
             />
             <StackLayout class="currency-tag">
-              <Label text="VEF" class="currency" textWrap="true" />
+              <Label :text="to" class="currency" textWrap="true" />
             </StackLayout>
           </StackLayout>
         </GridLayout>
         <Label
-          text="Monto en USD"
+          :text="`Monto en ${from}`"
           textWrap="true"
           fontSize="16"
           marginTop="5"
@@ -64,32 +65,40 @@
           textAlignment="center"
         />
         <TextField
+          v-model="multiplier"
           fontSize="22"
           fontWeight="bold"
           keyboardType="number"
           returnKeyType="done"
-          textAlignment="right"
+          textAlignment="center"
         />
       </StackLayout>
       <StackLayout row="1">
         <Label
-          text="Octubre 8, 2021 03:21 PM"
+          v-if="!loading"
+          :text="timestamp.date"
           fontSize="16"
           textWrap="true"
           marginTop="20"
           marginBottom="30"
           horizontalAlignment="center"
         />
+        <ActivityIndicator
+          v-else
+          :busy="loading"
+          marginTop="20"
+          marginBottom="25"
+        />
         <label class="line"></label>
       </StackLayout>
-      <ListView row="2" for="item in listOfValues" marginTop="10">
+      <ListView row="2" for="item in calculatedRates" marginTop="10">
         <v-template>
           <StackLayout>
             <Label :text="item.ref" fontSize="14" textWrap="true" />
             <Label>
               <FormattedString>
                 <Span :text="item.value" fontSize="22" fontWeight="bold" />
-                <Span text=" VEF" />
+                <Span :text="` ${to}`" />
               </FormattedString>
             </Label>
           </StackLayout>
