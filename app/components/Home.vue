@@ -28,13 +28,13 @@
               horizontalAlignment="center"
             />
             <StackLayout class="currency-tag">
-              <Label text="USD" textWrap="true" />
+              <Label text="USD" class="currency" textWrap="true" />
             </StackLayout>
           </StackLayout>
           <StackLayout
             col="1"
             horizontalAlignment="center"
-            verticalAlignment="center"
+            verticalAlignment="bottom"
           >
             <Label>
               <FormattedString>
@@ -50,7 +50,7 @@
               horizontalAlignment="center"
             />
             <StackLayout class="currency-tag">
-              <Label text="VEF" textWrap="true" />
+              <Label text="VEF" class="currency" textWrap="true" />
             </StackLayout>
           </StackLayout>
         </GridLayout>
@@ -58,28 +58,35 @@
           text="Monto en USD"
           textWrap="true"
           fontSize="16"
-          marginBottom="15"
+          marginTop="5"
+          marginBottom="20"
           textAlignment="center"
         />
-        <TextField keyboardType="number" />
+        <TextField
+          fontSize="22"
+          fontWeight="bold"
+          keyboardType="number"
+          returnKeyType="done"
+          textAlignment="right"
+        />
       </StackLayout>
       <StackLayout row="1">
         <Label
           text="Octubre 8, 2021 03:21 PM"
-          fontSize="14"
+          fontSize="16"
           textWrap="true"
-          marginBottom="15"
+          marginBottom="5"
           horizontalAlignment="center"
         />
         <label class="line"></label>
       </StackLayout>
-      <ListView row="2" for="item in listOfValues" marginTop="15">
+      <ListView row="2" for="item in listOfValues" marginTop="10">
         <v-template>
           <StackLayout>
-            <Label :text="item.ref" textWrap="true" />
+            <Label :text="item.ref" fontSize="14" textWrap="true" />
             <Label>
               <FormattedString>
-                <Span :text="item.value" fontSize="24" />
+                <Span :text="item.value" fontSize="22" fontWeight="bold" />
                 <Span text=" VEF" />
               </FormattedString>
             </Label>
@@ -122,14 +129,18 @@ export default Vue.extend({
 }
 
 .currency-tag {
-  width: 50;
+  width: 70;
   padding: 6;
   margin-top: 10;
-  font-size: 16;
-  font-weight: bold;
   border-radius: 10;
   text-align: center;
   background-color: rgba(187, 187, 187, 0.2);
+}
+
+.currency {
+  font-size: 16;
+  font-weight: bold;
+  font-family: "Nunito", "Nunito-Bold";
 }
 
 .switch-curency-icon {
