@@ -6,6 +6,7 @@
   "dependencies": {
     "@nativescript/core": "~8.1.1",
     "@nativescript/theme": "~3.0.1",
+    "currency.js": "^2.0.4",
     "nativescript-vue": "~2.9.0"
   },
   "devDependencies": {
