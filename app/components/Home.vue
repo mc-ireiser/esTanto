@@ -125,6 +125,17 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+Page {
+  background-image: linear-gradient(
+    to bottom,
+    #d8e0ec,
+    #dfe3ed,
+    #e5e6ed,
+    #eaeaed,
+    #eeeeee
+  );
+}
+
 .line {
   background: linear-gradient(to left, #28bfba, green, lightblue);
   height: 2px;
