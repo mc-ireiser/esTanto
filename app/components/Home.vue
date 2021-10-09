@@ -15,6 +15,7 @@
           text="alCambio"
           textWrap="true"
           fontSize="24"
+          marginTop="20"
           marginBottom="25"
           fontWeight="bold"
           textAlignment="center"
@@ -75,7 +76,8 @@
           text="Octubre 8, 2021 03:21 PM"
           fontSize="16"
           textWrap="true"
-          marginBottom="5"
+          marginTop="20"
+          marginBottom="30"
           horizontalAlignment="center"
         />
         <label class="line"></label>
