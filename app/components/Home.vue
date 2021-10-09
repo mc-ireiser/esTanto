@@ -101,25 +101,127 @@
 
 <script lang="ts">
 import Vue from "nativescript-vue";
+import { Http } from "@nativescript/core";
+import currency from "currency.js";
+
+interface IData {
+  loading: boolean;
+  multiplier: number;
+  from: string;
+  to: string;
+  timestamp: {
+    epoch: string;
+    date: string;
+  };
+  baseRates: {
+    bcv: number;
+    dt: number;
+  } | null;
+}
+
+type rateType = {
+  ref: string;
+  value: number | string;
+};
+
+const currencyFormat = {
+  separator: ".",
+  decimal: ",",
+  precision: 2,
+  symbol: "",
+  pattern: `# !`,
+};
 
 export default Vue.extend({
-  data() {
+  data(): IData {
     return {
-      listOfValues: [
-        {
-          value: 154.7,
-          ref: "x",
-        },
-        {
-          value: 156.15,
-          ref: "y",
-        },
-        {
-          value: 156.15,
-          ref: "z",
-        },
-      ],
+      loading: false,
+      from: "USD",
+      to: "VEF",
+      multiplier: 1,
+      baseRates: null,
+      timestamp: {
+        epoch: "",
+        date: "",
+      },
     };
+  },
+
+  created() {
+    this.asyncData();
+  },
+
+  computed: {
+    bcvRate(): string {
+      if (this.from === "USD") {
+        return currency(
+          currency(this.baseRates?.bcv as number).multiply(this.multiplier),
+          currencyFormat
+        ).format();
+      }
+
+      return currency(
+        currency(1)
+          .divide(this.baseRates?.bcv as number)
+          .multiply(this.multiplier),
+        currencyFormat
+      ).format();
+    },
+
+    dtRate(): string {
+      if (this.from === "USD") {
+        return currency(
+          currency(this.baseRates?.dt as number).multiply(this.multiplier),
+          currencyFormat
+        ).format();
+      }
+
+      return currency(
+        currency(1)
+          .divide(this.baseRates?.dt as number)
+          .multiply(this.multiplier),
+        currencyFormat
+      ).format();
+    },
+
+    calculatedRates(): rateType[] {
+      return [
+        {
+          ref: "BCV",
+          value: this.bcvRate,
+        },
+        {
+          ref: "DolarToday",
+          value: this.dtRate,
+        },
+      ];
+    },
+  },
+
+  methods: {
+    async asyncData() {
+      this.loading = true;
+      const URL = "https://s3.amazonaws.com/dolartoday/data.json";
+      const data: any = await Http.getJSON(URL);
+
+      this.baseRates = {
+        bcv: data.USD.promedio_real as number,
+        dt: data.USD.dolartoday as number,
+      };
+
+      this.timestamp = {
+        epoch: data._timestamp.epoch as string,
+        date: data._timestamp.fecha as string,
+      };
+
+      this.loading = false;
+    },
+
+    changeConversionOrder() {
+      const aux = this.from;
+      this.from = this.to;
+      this.to = aux;
+    },
   },
 });
 </script>
