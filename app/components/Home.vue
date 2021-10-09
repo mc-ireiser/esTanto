@@ -8,31 +8,50 @@
         <Label
           text="Conversor Monetario"
           textWrap="true"
-          fontSize="16"
+          fontSize="20"
+          marginBottom="25"
           fontWeight="bold"
           textAlignment="center"
         />
-        <GridLayout rows="auto" columns="*,*,*">
+        <GridLayout rows="auto" columns="*,*,*" marginBottom="35">
           <StackLayout col="0" horizontalAlignment="center">
-            <Label text="De" textWrap="true" />
-            <Label text="USD" textWrap="true" />
+            <Label
+              text="De"
+              fontSize="15"
+              textWrap="true"
+              horizontalAlignment="center"
+            />
+            <StackLayout class="currency-tag">
+              <Label text="USD" textWrap="true" />
+            </StackLayout>
           </StackLayout>
-          <StackLayout col="1" horizontalAlignment="center">
+          <StackLayout
+            col="1"
+            horizontalAlignment="center"
+            verticalAlignment="center"
+          >
             <Label>
               <FormattedString>
-                <Span class="fas" text.decode="&#xf362; " />
+                <Span class="fas switch-curency-icon" text.decode="&#xf362; " />
               </FormattedString>
             </Label>
           </StackLayout>
           <StackLayout col="2" horizontalAlignment="center">
-            <Label text="A" textWrap="true" />
-            <Label text="VEF" textWrap="true" />
+            <Label
+              text="A"
+              fontSize="15"
+              textWrap="true"
+              horizontalAlignment="center"
+            />
+            <StackLayout class="currency-tag">
+              <Label text="VEF" textWrap="true" />
+            </StackLayout>
           </StackLayout>
         </GridLayout>
         <Label
           text="Monto en USD"
           textWrap="true"
-          fontSize="14"
+          fontSize="16"
           textAlignment="center"
         />
         <TextField keyboardType="number" />
@@ -48,4 +67,18 @@ export default Vue.extend({});
 </script>
 
 <style scoped lang="scss">
+.currency-tag {
+  width: 50;
+  padding: 6;
+  margin-top: 10;
+  font-size: 16;
+  font-weight: bold;
+  border-radius: 10;
+  text-align: center;
+  background-color: rgba(187, 187, 187, 0.2);
+}
+
+.switch-curency-icon {
+  font-size: 30;
+}
 </style>
