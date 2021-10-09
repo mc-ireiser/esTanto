@@ -140,7 +140,6 @@ export default Vue.extend({
 .currency {
   font-size: 16;
   font-weight: bold;
-  font-family: "Nunito", "Nunito-Bold";
 }
 
 .switch-curency-icon {
