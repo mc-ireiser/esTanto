@@ -7,15 +7,9 @@
       marginTop="10"
       padding="20"
       minWidth="320"
-      width="400"
+      width="360"
     >
-      <GridLayout
-        rows="auto, auto, *"
-        columns="*"
-        width="320"
-        margin="25"
-        padding="20"
-      >
+      <GridLayout rows="auto, auto, *" columns="*" margin="25" padding="20">
         <StackLayout row="0" marginBottom="20">
           <Label
             text="alCambio"
