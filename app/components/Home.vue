@@ -24,7 +24,7 @@
           <StackLayout col="0" horizontalAlignment="center">
             <Label
               text="De"
-              fontSize="15"
+              fontSize="18"
               textWrap="true"
               horizontalAlignment="center"
             />
@@ -47,7 +47,7 @@
           <StackLayout col="2" horizontalAlignment="center">
             <Label
               text="A"
-              fontSize="15"
+              fontSize="18"
               textWrap="true"
               horizontalAlignment="center"
             />
@@ -59,7 +59,7 @@
         <Label
           :text="`Monto en ${from}`"
           textWrap="true"
-          fontSize="16"
+          fontSize="24"
           marginTop="5"
           marginBottom="20"
           textAlignment="center"
@@ -68,6 +68,7 @@
           v-model="multiplier"
           fontSize="22"
           fontWeight="bold"
+          class="inputField"
           keyboardType="number"
           returnKeyType="done"
           textAlignment="center"
@@ -77,7 +78,7 @@
         <Label
           v-if="!loading"
           :text="timestamp.date"
-          fontSize="16"
+          fontSize="18"
           textWrap="true"
           marginTop="20"
           marginBottom="30"
@@ -94,11 +95,11 @@
       <ListView row="2" for="item in calculatedRates" marginTop="10">
         <v-template>
           <StackLayout>
-            <Label :text="item.ref" fontSize="14" textWrap="true" />
+            <Label :text="item.ref" fontSize="16" textWrap="true" />
             <Label>
               <FormattedString>
                 <Span :text="item.value" fontSize="22" fontWeight="bold" />
-                <Span :text="` ${to}`" />
+                <Span :text="` ${to}`" fontSize="14" />
               </FormattedString>
             </Label>
           </StackLayout>
