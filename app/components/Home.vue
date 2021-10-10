@@ -248,9 +248,13 @@ Page {
   );
 }
 
+ActivityIndicator {
+  color: #656565;
+}
+
 .line {
-  background: linear-gradient(to left, #28bfba, green, lightblue);
   height: 2px;
+  background: linear-gradient(to left, #65656513, #656565, #65656513);
 }
 
 .currency-tag {
@@ -259,12 +263,20 @@ Page {
   margin-top: 10;
   border-radius: 10;
   text-align: center;
+  border-width: 5px;
+  border-color: #6565651e;
   background-color: rgba(187, 187, 187, 0.2);
 }
 
 .currency {
-  font-size: 16;
+  font-size: 18;
   font-weight: bold;
+}
+
+.inputField {
+  border-width: 5px;
+  border-color: #6565651e;
+  background-color: rgba(187, 187, 187, 0.2);
 }
 
 .switch-curency-icon {
