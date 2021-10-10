@@ -208,7 +208,7 @@ export default Vue.extend({
     calculatedRates(): rateType[] {
       return [
         {
-          ref: "BCV",
+          ref: "BCV (tasa oficial)",
           value: this.bcvRate,
         },
         {
