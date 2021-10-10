@@ -3,7 +3,7 @@ import Home from "./components/Home.vue";
 
 Vue.registerElement(
   "PullToRefresh",
-  () => require("@nstudio/nativescript-pulltorefresh").PullToRefresh
+  () => require("@nativescript-community/ui-pulltorefresh").PullToRefresh
 );
 
 declare let __DEV__: boolean;
