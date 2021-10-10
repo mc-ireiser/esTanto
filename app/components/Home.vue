@@ -220,6 +220,12 @@ export default Vue.extend({
   },
 
   methods: {
+    refresh(args: any) {
+      this.asyncData();
+      var pullRefresh = args.object;
+      pullRefresh.refreshing = false;
+    },
+
     async asyncData() {
       this.loading = true;
       const URL = "https://s3.amazonaws.com/dolartoday/data.json";
@@ -239,9 +245,14 @@ export default Vue.extend({
     },
 
     changeConversionOrder() {
+      this.vibrate();
       const aux = this.from;
       this.from = this.to;
       this.to = aux;
+    },
+
+    vibrate() {
+      vibrator.vibrate(30);
     },
   },
 });
