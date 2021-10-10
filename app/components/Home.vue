@@ -1,118 +1,137 @@
 <template>
   <Page actionBarHidden="true">
-    <ActionBar flat="true">
-      <Label text="alCambio" fontSize="24" />
-    </ActionBar>
-    <GridLayout
-      rows="auto, auto, *"
-      columns="*"
-      width="320"
-      margin="25"
+    <PullToRefresh
+      @refresh="refresh"
+      indicatorFillColor="#f6f6f6"
+      indicatorColor="#656565"
+      marginTop="10"
       padding="20"
+      minWidth="320"
+      width="400"
     >
-      <StackLayout row="0" marginBottom="20">
-        <Label
-          text="alCambio"
-          textWrap="true"
-          fontSize="24"
-          marginTop="20"
-          marginBottom="25"
-          fontWeight="bold"
-          textAlignment="center"
-        />
-        <GridLayout rows="auto" columns="*,*,*" marginBottom="35">
-          <StackLayout col="0" horizontalAlignment="center">
-            <Label
-              text="De"
-              fontSize="18"
-              textWrap="true"
-              horizontalAlignment="center"
-            />
-            <StackLayout class="currency-tag">
-              <Label :text="from" class="currency" textWrap="true" />
+      <GridLayout
+        rows="auto, auto, *"
+        columns="*"
+        width="320"
+        margin="25"
+        padding="20"
+      >
+        <StackLayout row="0" marginBottom="20">
+          <Label
+            text="alCambio"
+            textWrap="true"
+            fontSize="24"
+            marginTop="40"
+            marginBottom="25"
+            fontWeight="bold"
+            textAlignment="center"
+          />
+          <GridLayout rows="auto" columns="*,*,*" marginBottom="35">
+            <StackLayout col="0" horizontalAlignment="center">
+              <Label
+                text="De"
+                fontSize="18"
+                textWrap="true"
+                horizontalAlignment="center"
+              />
+              <StackLayout class="currency-tag">
+                <Label :text="from" class="currency" textWrap="true" />
+              </StackLayout>
             </StackLayout>
-          </StackLayout>
-          <StackLayout
-            col="1"
+            <StackLayout
+              col="1"
+              horizontalAlignment="center"
+              verticalAlignment="bottom"
+              @tap="changeConversionOrder()"
+            >
+              <Label>
+                <FormattedString>
+                  <Span
+                    class="fas switch-curency-icon"
+                    text.decode="&#xf362; "
+                  />
+                </FormattedString>
+              </Label>
+            </StackLayout>
+            <StackLayout col="2" horizontalAlignment="center">
+              <Label
+                text="A"
+                fontSize="18"
+                textWrap="true"
+                horizontalAlignment="center"
+              />
+              <StackLayout class="currency-tag">
+                <Label :text="to" class="currency" textWrap="true" />
+              </StackLayout>
+            </StackLayout>
+          </GridLayout>
+          <Label
+            :text="`Monto en ${from}`"
+            textWrap="true"
+            fontSize="24"
+            marginTop="5"
+            marginBottom="20"
+            textAlignment="center"
+          />
+          <TextField
+            v-model="multiplier"
+            fontSize="22"
+            fontWeight="bold"
+            class="inputField"
+            keyboardType="number"
+            returnKeyType="done"
+            textAlignment="center"
+            @focus="vibrate()"
+          />
+        </StackLayout>
+        <StackLayout row="1">
+          <Label
+            v-if="!loading"
+            :text="timestamp.date"
+            fontSize="18"
+            textWrap="true"
+            marginTop="20"
+            marginBottom="30"
             horizontalAlignment="center"
-            verticalAlignment="bottom"
-            @tap="changeConversionOrder()"
-          >
-            <Label>
-              <FormattedString>
-                <Span class="fas switch-curency-icon" text.decode="&#xf362; " />
-              </FormattedString>
-            </Label>
-          </StackLayout>
-          <StackLayout col="2" horizontalAlignment="center">
-            <Label
-              text="A"
-              fontSize="18"
-              textWrap="true"
-              horizontalAlignment="center"
-            />
-            <StackLayout class="currency-tag">
-              <Label :text="to" class="currency" textWrap="true" />
-            </StackLayout>
-          </StackLayout>
-        </GridLayout>
-        <Label
-          :text="`Monto en ${from}`"
-          textWrap="true"
-          fontSize="24"
-          marginTop="5"
-          marginBottom="20"
-          textAlignment="center"
-        />
-        <TextField
-          v-model="multiplier"
-          fontSize="22"
-          fontWeight="bold"
-          class="inputField"
-          keyboardType="number"
-          returnKeyType="done"
-          textAlignment="center"
-        />
-      </StackLayout>
-      <StackLayout row="1">
-        <Label
+          />
+          <ActivityIndicator
+            v-else
+            :busy="loading"
+            marginTop="20"
+            marginBottom="25"
+          />
+          <label class="line"></label>
+        </StackLayout>
+        <ListView
           v-if="!loading"
-          :text="timestamp.date"
-          fontSize="18"
-          textWrap="true"
-          marginTop="20"
-          marginBottom="30"
-          horizontalAlignment="center"
-        />
-        <ActivityIndicator
-          v-else
-          :busy="loading"
-          marginTop="20"
-          marginBottom="25"
-        />
-        <label class="line"></label>
-      </StackLayout>
-      <ListView row="2" for="item in calculatedRates" marginTop="10">
-        <v-template>
-          <StackLayout>
-            <Label :text="item.ref" fontSize="16" textWrap="true" />
-            <Label>
-              <FormattedString>
-                <Span :text="item.value" fontSize="22" fontWeight="bold" />
-                <Span :text="` ${to}`" fontSize="14" />
-              </FormattedString>
-            </Label>
-          </StackLayout>
-        </v-template>
-      </ListView>
-    </GridLayout>
+          row="2"
+          for="item in calculatedRates"
+          marginTop="10"
+        >
+          <v-template>
+            <StackLayout>
+              <Label :text="item.ref" fontSize="16" textWrap="true" />
+              <Label>
+                <FormattedString>
+                  <Span :text="item.value" fontSize="22" fontWeight="bold" />
+                  <Span :text="` ${to}`" fontSize="14" />
+                </FormattedString>
+              </Label>
+            </StackLayout>
+          </v-template>
+        </ListView>
+      </GridLayout>
+    </PullToRefresh>
   </Page>
 </template>
 
 <script lang="ts">
 import Vue from "nativescript-vue";
-import { Http } from "@nativescript/core";
+import { Http, ApplicationSettings } from "@nativescript/core";
 import currency from "currency.js";
+import { Vibrate } from "nativescript-vibrate";
+
+const vibrator = new Vibrate();
 
 interface IData {
   loading: boolean;
