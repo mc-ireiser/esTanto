@@ -121,7 +121,7 @@
 
 <script lang="ts">
 import Vue from "nativescript-vue";
-import { Http, ApplicationSettings } from "@nativescript/core";
+import { Http, ApplicationSettings, Dialogs } from "@nativescript/core";
 import currency from "currency.js";
 import { Vibrate } from "nativescript-vibrate";
 
@@ -171,18 +171,20 @@ export default Vue.extend({
   },
 
   created() {
+    this.getApiData();
+
+    let options = {
+      title: "Descargo de responsabilidad",
+      message:
+        "Toda la información en la aplicación se proporciona 'tal cual', sin garantía de integridad, exactitud, puntualidad o de los resultados obtenidos del uso de esta información, y sin garantía de ningún tipo, expresa o implícita. Las tasas referenciales mostradas son públicas y externas a la aplicación, no se guarda relación de ningún tipo con las mismas. Las referencias hechas a nombres de terceros, logotipos y marcas registradas se incluyen estrictamente para uso referencial y son propiedad de sus respectivos propietarios.",
+      okButtonText: "Acepto",
+    };
+
     if (!ApplicationSettings.getBoolean("tos")) {
-      alert({
-        title: "Descargo de responsabilidad",
-        message:
-          "Toda la información en la aplicación se proporciona 'tal cual', sin garantía de integridad, exactitud, puntualidad o de los resultados obtenidos del uso de esta información, y sin garantía de ningún tipo, expresa o implícita. Las tasas referenciales mostradas son públicas y externas a la aplicación, no se guarda relación de ningún tipo con las mismas. Las referencias hechas a nombres de terceros, logotipos y marcas registradas se incluyen estrictamente para uso referencial y son propiedad de sus respectivos propietarios.",
-        okButtonText: "Acepto",
-      }).then(() => {
+      Dialogs.alert(options).then(() => {
         ApplicationSettings.setBoolean("tos", true);
       });
     }
-
-    this.asyncData();
   },
 
   computed: {
