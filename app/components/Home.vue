@@ -234,16 +234,20 @@ export default Vue.extend({
 
   methods: {
     refresh(args: any) {
-      this.asyncData();
+      this.getApiData();
       var pullRefresh = args.object;
       pullRefresh.refreshing = false;
     },
 
-    async asyncData() {
+    async getApiData() {
       this.loading = true;
       const URL = "https://s3.amazonaws.com/dolartoday/data.json";
       const data: any = await Http.getJSON(URL);
+      this.processApidata(data);
+      this.loading = false;
+    },
 
+    processApidata(data: any) {
       this.baseRates = {
         bcv: data.USD.promedio_real as number,
         dt: data.USD.dolartoday as number,
@@ -253,8 +257,6 @@ export default Vue.extend({
         epoch: data._timestamp.epoch as string,
         date: data._timestamp.fecha as string,
       };
-
-      this.loading = false;
     },
 
     changeConversionOrder() {
