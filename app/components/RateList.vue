@@ -1,5 +1,9 @@
 <template>
-  <ListView v-if="!loading && red" for="item in calculatedRates">
+  <ListView
+    v-if="!loading && red"
+    for="item in calculatedRates"
+    @itemTap="copyRate"
+  >
     <v-template>
       <StackLayout>
         <Label :text="item.ref" fontSize="16" textWrap="true" />
@@ -18,6 +22,7 @@
 import Vue from "vue";
 import currency from "currency.js";
 import { mapGetters } from "vuex";
+import { setTextSync } from "nativescript-clipboard";
 
 type rateType = {
   ref: string;
@@ -92,6 +97,12 @@ export default Vue.extend({
           value: this.dtRate,
         },
       ];
+    },
+  },
+
+  methods: {
+    copyRate(event: any) {
+      setTextSync(event.item.value.trim());
     },
   },
 });
