@@ -45,25 +45,39 @@ export default Vue.extend({
     bcvRate(): string {
       if (this.from === "USD") {
         return currency(
-          currency(this.baseRates?.bcv as number).multiply(this.multiplier),
+          currency(this.baseRates?.bcv as number, { precision: 8 }).multiply(
+            this.multiplier
+          ).value,
           currencyFormat
         ).format();
       }
 
-      const VEF = currency(1).divide(this.baseRates?.bcv as number);
-      return currency(VEF.multiply(this.multiplier), currencyFormat).format();
+      const VEF = currency(1.0, { precision: 8 }).divide(
+        this.baseRates?.bcv as number
+      ).value;
+      const total = currency(VEF, { precision: 8 }).multiply(
+        this.multiplier
+      ).value;
+      return currency(total, currencyFormat).format();
     },
 
     dtRate(): string {
       if (this.from === "USD") {
         return currency(
-          currency(this.baseRates?.dt as number).multiply(this.multiplier),
+          currency(this.baseRates?.dt as number, { precision: 8 }).multiply(
+            this.multiplier
+          ).value,
           currencyFormat
         ).format();
       }
 
-      const VEF = currency(1).divide(this.baseRates?.dt as number);
-      return currency(VEF.multiply(this.multiplier), currencyFormat).format();
+      const VEF = currency(1.0, { precision: 8 }).divide(
+        this.baseRates?.dt as number
+      ).value;
+      const total = currency(VEF, { precision: 8 }).multiply(
+        this.multiplier
+      ).value;
+      return currency(total, currencyFormat).format();
     },
 
     calculatedRates(): rateType[] {
