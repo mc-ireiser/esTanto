@@ -55,6 +55,12 @@ import UserInput from "./UserInput.vue";
 import RateList from "./RateList.vue";
 import StatusIndicator from "./StatusIndicator.vue";
 import API_URL from "~/data/api";
+import {
+  mutation_red,
+  mutation_loading,
+  mutation_baseRates,
+  mutation_timestamp,
+} from "~/store/mutationNames";
 
 export default Vue.extend({
   components: {
@@ -93,24 +99,24 @@ export default Vue.extend({
     async getApiData() {
       const connectivityType = Connectivity.getConnectionType();
       if (!connectivityType) {
-        this.$store.commit("red", false);
+        this.$store.commit(mutation_red, false);
         return;
       }
 
-      this.$store.commit("loading", true);
-      this.$store.commit("red", true);
+      this.$store.commit(mutation_loading, true);
+      this.$store.commit(mutation_red, true);
       const data: any = await Http.getJSON(API_URL);
       this.processApidata(data);
-      this.$store.commit("loading", false);
+      this.$store.commit(mutation_loading, false);
     },
 
     processApidata(data: any) {
-      this.$store.commit("baseRates", {
+      this.$store.commit(mutation_baseRates, {
         bcv: data.USD.promedio_real as number,
         dt: data.USD.dolartoday as number,
       });
 
-      this.$store.commit("timestamp", {
+      this.$store.commit(mutation_timestamp, {
         epoch: data._timestamp.epoch as string,
         date: data._timestamp.fecha as string,
       });

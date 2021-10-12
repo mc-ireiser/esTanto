@@ -71,6 +71,11 @@
 import Vue from "vue";
 import { mapGetters } from "vuex";
 import vibration from "~/utils/vibrate";
+import {
+  mutation_from,
+  mutation_to,
+  mutation_multiplier,
+} from "~/store/mutationNames";
 
 export default Vue.extend({
   data() {
@@ -91,12 +96,12 @@ export default Vue.extend({
     changeConversionOrder() {
       this.vibrate();
       const aux = this.from;
-      this.$store.commit("from", this.to);
-      this.$store.commit("to", aux);
+      this.$store.commit(mutation_from, this.to);
+      this.$store.commit(mutation_to, aux);
     },
 
     updateMultiplier(args: any) {
-      this.$store.commit("multiplier", args.value);
+      this.$store.commit(mutation_multiplier, args.value);
     },
 
     vibrate() {
@@ -104,7 +109,7 @@ export default Vue.extend({
     },
 
     clearInput() {
-      this.$store.commit("multiplier", "");
+      this.$store.commit(mutation_multiplier, "");
     },
   },
 });
