@@ -60,6 +60,7 @@
       keyboardType="number"
       returnKeyType="done"
       textAlignment="center"
+      @doubleTap="clearInput()"
       @focus="vibrate()"
       @textChange="updateMultiplier"
     />
@@ -100,6 +101,10 @@ export default Vue.extend({
 
     vibrate() {
       vibration();
+    },
+
+    clearInput() {
+      this.$store.commit("multiplier", "");
     },
   },
 });

@@ -34,8 +34,12 @@
           </StackLayout>
         </StackLayout>
         <UserInput row="1" marginTop="10" marginBottom="20"></UserInput>
-        <StatusIndicator row="2"></StatusIndicator>
-        <RateList row="3" v-if="!loading" marginTop="10"></RateList>
+        <StatusIndicator row="2" v-if="multiplier"></StatusIndicator>
+        <RateList
+          row="3"
+          v-if="!loading && multiplier"
+          marginTop="10"
+        ></RateList>
       </GridLayout>
     </PullToRefresh>
   </Page>
@@ -74,6 +78,7 @@ export default Vue.extend({
 
   computed: {
     ...mapGetters({
+      multiplier: "multiplier",
       loading: "loading",
     }),
   },
