@@ -19,10 +19,9 @@
         orientation="horizontal"
         horizontalAlignment="center"
       />
+      <label class="line" marginTop="18"></label>
     </StackLayout>
     <ActivityIndicator v-else :busy="loading" marginTop="1" />
-
-    <label class="line" marginTop="18"></label>
   </StackLayout>
 </template>
 

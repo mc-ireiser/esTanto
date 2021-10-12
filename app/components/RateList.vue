@@ -1,5 +1,5 @@
 <template>
-  <ListView for="item in calculatedRates">
+  <ListView v-if="!loading && red" for="item in calculatedRates">
     <v-template>
       <StackLayout>
         <Label :text="item.ref" fontSize="16" textWrap="true" />
@@ -35,6 +35,7 @@ const currencyFormat = {
 export default Vue.extend({
   computed: {
     ...mapGetters({
+      red: "red",
       loading: "loading",
       from: "from",
       to: "to",
