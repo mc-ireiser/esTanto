@@ -23,6 +23,7 @@ import Vue from "vue";
 import currency from "currency.js";
 import { mapGetters } from "vuex";
 import { setTextSync } from "nativescript-clipboard";
+import { Toasty } from "@triniwiz/nativescript-toasty";
 
 type rateType = {
   ref: string;
@@ -103,6 +104,11 @@ export default Vue.extend({
   methods: {
     copyRate(event: any) {
       setTextSync(event.item.value.trim());
+      const toast = new Toasty({
+        text: "Valor copiado!",
+        yAxisOffset: 20,
+      }).setBackgroundColor("#656565");
+      toast.show();
     },
   },
 });
