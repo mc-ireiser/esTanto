@@ -1,7 +1,7 @@
 <template>
   <StackLayout>
     <Label
-      text="alCambio"
+      text="esTanto"
       textWrap="true"
       fontSize="24"
       marginBottom="25"

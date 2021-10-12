@@ -1,7 +1,7 @@
 import { NativeScriptConfig } from "@nativescript/core";
 
 export default {
-  id: "me.ireiser.alcambio",
+  id: "me.ireiser.estanto",
   appPath: "app",
   appResourcesPath: "App_Resources",
   android: {
