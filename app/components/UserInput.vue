@@ -4,7 +4,6 @@
       text="alCambio"
       textWrap="true"
       fontSize="24"
-      marginTop="40"
       marginBottom="25"
       fontWeight="bold"
       textAlignment="center"
@@ -70,9 +69,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
-import { Vibrate } from "nativescript-vibrate";
-
-const vibrator = new Vibrate();
+import vibration from "~/utils/vibrate";
 
 export default Vue.extend({
   data() {
@@ -102,7 +99,7 @@ export default Vue.extend({
     },
 
     vibrate() {
-      vibrator.vibrate(30);
+      vibration();
     },
   },
 });

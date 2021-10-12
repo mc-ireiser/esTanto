@@ -4,15 +4,38 @@
       @refresh="refresh"
       indicatorFillColor="#f6f6f6"
       indicatorColor="#656565"
-      marginTop="10"
+      marginTop="5"
       padding="20"
       minWidth="320"
       width="360"
     >
-      <GridLayout rows="auto, auto, *" columns="*" margin="25" padding="20">
-        <UserInput row="0" marginBottom="20"></UserInput>
-        <StatusIndicator row="1"></StatusIndicator>
-        <RateList row="2" v-if="!loading" marginTop="10"></RateList>
+      <GridLayout
+        rows="auto, auto, auto, *"
+        columns="*"
+        margin="20"
+        padding="20"
+      >
+        <StackLayout
+          row="0"
+          orientation="horizontal"
+          horizontalAlignment="right"
+          marginTop="10"
+        >
+          <StackLayout
+            marginRight="20"
+            class="icon-options"
+            @tap="toggleThemeMode()"
+          >
+            <Label
+              text.decode="&#xf186; "
+              horizontalAlignment="center"
+              class="fas"
+            ></Label>
+          </StackLayout>
+        </StackLayout>
+        <UserInput row="1" marginTop="10" marginBottom="20"></UserInput>
+        <StatusIndicator row="2"></StatusIndicator>
+        <RateList row="3" v-if="!loading" marginTop="10"></RateList>
       </GridLayout>
     </PullToRefresh>
   </Page>
@@ -22,12 +45,12 @@
 import Vue from "nativescript-vue";
 import { Http, ApplicationSettings, Dialogs } from "@nativescript/core";
 import { mapGetters } from "vuex";
-// Components
+import Theme from "@nativescript/theme";
+import vibration from "~/utils/vibrate";
+import disclaimer from "~/utils/disclaimer";
 import UserInput from "./UserInput.vue";
 import RateList from "./RateList.vue";
 import StatusIndicator from "./StatusIndicator.vue";
-// Data
-import disclaimerDialog from "~/data/disclaimerDialog";
 import API_URL from "~/data/api";
 
 export default Vue.extend({
@@ -37,14 +60,13 @@ export default Vue.extend({
     StatusIndicator,
   },
 
-  mounted() {
+  created() {
     this.getApiData();
-    const { title, message } = disclaimerDialog;
+  },
 
+  mounted() {
     if (!ApplicationSettings.getBoolean("tos")) {
-      Dialogs.alert({ title, message, okButtonText: "Acepto" }).then(() => {
-        ApplicationSettings.setBoolean("tos", true);
-      });
+      this.showDisclaimerDialog();
     }
   },
 
@@ -79,9 +101,26 @@ export default Vue.extend({
         date: data._timestamp.fecha as string,
       });
     },
+
+    showDisclaimerDialog() {
+      vibration();
+      disclaimer();
+    },
+
+    toggleThemeMode() {
+      vibration();
+      Theme.toggleMode();
+    },
   },
 });
 </script>
 
 <style scoped lang="scss">
+.icon-options {
+  height: 30;
+  width: 30;
+  border-radius: 20;
+  vertical-align: center;
+  background-color: rgba(187, 187, 187, 0.2);
+}
 </style>
