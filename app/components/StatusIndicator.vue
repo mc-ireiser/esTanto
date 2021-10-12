@@ -41,6 +41,10 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+ActivityIndicator {
+  color: #656565;
+}
+
 .line {
   height: 2px;
   background: linear-gradient(to left, #65656513, #656565, #65656513);

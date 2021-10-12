@@ -131,6 +131,10 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+Page {
+  background-color: #6464641e; //  #bdc3c7;
+}
+
 .icon-options {
   height: 30;
   width: 30;
