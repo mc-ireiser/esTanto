@@ -4,7 +4,7 @@
       @refresh="refresh"
       indicatorFillColor="#f6f6f6"
       indicatorColor="#656565"
-      marginTop="5"
+      marginTop="20"
       padding="20"
       minWidth="320"
       width="360"
@@ -22,12 +22,12 @@
           marginTop="10"
         >
           <StackLayout
-            marginRight="20"
             class="icon-options"
-            @tap="toggleThemeMode()"
+            marginRight="20"
+            @tap="showDisclaimerDialog()"
           >
             <Label
-              text.decode="&#xf186; "
+              text.decode="&#xf12a; "
               horizontalAlignment="center"
               class="fas"
             ></Label>
@@ -45,7 +45,6 @@
 import Vue from "nativescript-vue";
 import { Http, ApplicationSettings, Dialogs } from "@nativescript/core";
 import { mapGetters } from "vuex";
-import Theme from "@nativescript/theme";
 import vibration from "~/utils/vibrate";
 import disclaimer from "~/utils/disclaimer";
 import UserInput from "./UserInput.vue";
@@ -65,7 +64,10 @@ export default Vue.extend({
   },
 
   mounted() {
-    if (!ApplicationSettings.getBoolean("tos")) {
+    if (
+      !ApplicationSettings.hasKey("tos") ||
+      !ApplicationSettings.getBoolean("tos")
+    ) {
       this.showDisclaimerDialog();
     }
   },
@@ -105,11 +107,6 @@ export default Vue.extend({
     showDisclaimerDialog() {
       vibration();
       disclaimer();
-    },
-
-    toggleThemeMode() {
-      vibration();
-      Theme.toggleMode();
     },
   },
 });
