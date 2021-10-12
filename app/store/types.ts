@@ -1,4 +1,5 @@
 export interface IStore {
+  red: boolean;
   loading: boolean;
   from: string;
   to: string;

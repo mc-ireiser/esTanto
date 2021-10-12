@@ -1,6 +1,10 @@
 import { IStore } from "./types";
 
 const mutations = {
+  red(state: IStore, payload: boolean) {
+    state.red = payload;
+  },
+
   loading(state: IStore, payload: boolean) {
     state.loading = payload;
   },

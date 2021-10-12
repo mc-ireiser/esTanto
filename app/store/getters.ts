@@ -1,5 +1,9 @@
 import { IStore } from "./types";
 
+export const red = (state: IStore) => {
+  return state.red;
+};
+
 export const loading = (state: IStore) => {
   return state.loading;
 };

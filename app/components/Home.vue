@@ -43,7 +43,7 @@
 
 <script lang="ts">
 import Vue from "nativescript-vue";
-import { Http, ApplicationSettings, Dialogs } from "@nativescript/core";
+import { Http, Connectivity, ApplicationSettings } from "@nativescript/core";
 import { mapGetters } from "vuex";
 import vibration from "~/utils/vibrate";
 import disclaimer from "~/utils/disclaimer";
@@ -86,7 +86,14 @@ export default Vue.extend({
     },
 
     async getApiData() {
+      const connectivityType = Connectivity.getConnectionType();
+      if (!connectivityType) {
+        this.$store.commit("red", false);
+        return;
+      }
+
       this.$store.commit("loading", true);
+      this.$store.commit("red", true);
       const data: any = await Http.getJSON(API_URL);
       this.processApidata(data);
       this.$store.commit("loading", false);
