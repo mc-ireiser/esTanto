@@ -1,19 +1,12 @@
 <template>
   <StackLayout>
-    <Label
-      text="esTanto"
-      textWrap="true"
-      fontSize="24"
-      marginBottom="25"
-      fontWeight="bold"
-      textAlignment="center"
-    />
+    <Label text="esTanto" textWrap="true" class="title" />
     <GridLayout rows="auto" columns="*,*,*" marginBottom="35">
       <StackLayout col="0" horizontalAlignment="center">
         <Label
           text="De"
-          fontSize="18"
           textWrap="true"
+          class="label-currency-tag"
           horizontalAlignment="center"
         />
         <StackLayout class="currency-tag">
@@ -35,8 +28,8 @@
       <StackLayout col="2" horizontalAlignment="center">
         <Label
           text="A"
-          fontSize="18"
           textWrap="true"
+          class="label-currency-tag"
           horizontalAlignment="center"
         />
         <StackLayout class="currency-tag">
@@ -47,16 +40,12 @@
     <Label
       :text="`Monto en ${from}`"
       textWrap="true"
-      fontSize="24"
-      marginTop="5"
-      marginBottom="20"
+      class="label-input-field"
       textAlignment="center"
     />
     <TextField
       :text="multiplier"
-      fontSize="22"
-      fontWeight="bold"
-      class="inputField"
+      class="input-field"
       keyboardType="number"
       returnKeyType="done"
       textAlignment="center"
@@ -116,6 +105,17 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.title {
+  font-size: 25;
+  font-weight: bold;
+  margin-bottom: 25;
+  text-align: center;
+}
+
+.label-currency-tag {
+  font-size: 18;
+}
+
 .currency-tag {
   width: 70;
   padding: 6;
@@ -132,7 +132,15 @@ export default Vue.extend({
   font-weight: bold;
 }
 
-.inputField {
+.label-input-field {
+  font-size: 24;
+  margin-top: 5;
+  margin-bottom: 20;
+}
+
+.input-field {
+  font-size: 22;
+  font-weight: bold;
   border-width: 5px;
   border-color: #6565651e;
   background-color: rgba(187, 187, 187, 0.2);
