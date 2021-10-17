@@ -5,7 +5,9 @@ export default {
   appPath: "app",
   appResourcesPath: "App_Resources",
   android: {
+    codeCache: true,
     v8Flags: "--expose_gc",
-    markingMode: "none"
+    markingMode: "none",
+    discardUncaughtJsExceptions: true
   }
 } as NativeScriptConfig;
