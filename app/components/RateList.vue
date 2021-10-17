@@ -1,21 +1,43 @@
 <template>
   <ListView
-    v-if="!loading && red"
+    v-if="!loading && red && screenHeight > 580"
     for="item in calculatedRates"
-    @itemTap="copyRate"
+    class="list"
+    @itemTap="copyRateFromListW"
   >
     <v-template>
       <StackLayout>
-        <Label :text="item.ref" fontSize="16" textWrap="true" />
+        <Label :text="item.ref" textWrap="true" class="item-label" />
         <Label>
           <FormattedString>
-            <Span :text="item.value" fontSize="22" fontWeight="bold" />
-            <Span :text="` ${to}`" fontSize="14" />
+            <Span :text="item.value" class="item-value" />
+            <Span :text="` ${to}`" class="item-symbol" />
           </FormattedString>
         </Label>
       </StackLayout>
     </v-template>
   </ListView>
+
+  <StackLayout v-else marginBottom="30">
+    <StackLayout
+      v-for="(item, index) in calculatedRates"
+      :key="index"
+      @tap="copyRate(item.value)"
+    >
+      <Label
+        :text="item.ref"
+        textWrap="true"
+        marginTop="20"
+        class="item-label"
+      />
+      <Label>
+        <FormattedString>
+          <Span :text="item.value" class="item-value" />
+          <Span :text="` ${to}`" class="item-symbol" />
+        </FormattedString>
+      </Label>
+    </StackLayout>
+  </StackLayout>
 </template>
 
 <script lang="ts">
@@ -24,10 +46,11 @@ import currency from "currency.js";
 import { mapGetters } from "vuex";
 import { setTextSync } from "nativescript-clipboard";
 import { Toasty } from "@triniwiz/nativescript-toasty";
+import { Screen } from "@nativescript/core";
 
 type rateType = {
   ref: string;
-  value: number | string;
+  value: string;
 };
 
 const currencyFormat = {
@@ -48,6 +71,14 @@ export default Vue.extend({
       multiplier: "multiplier",
       baseRates: "baseRates",
     }),
+
+    screenWidth() {
+      return Screen.mainScreen.widthDIPs;
+    },
+
+    screenHeight() {
+      return Screen.mainScreen.heightDIPs;
+    },
 
     bcvRate(): string {
       if (this.from === "USD") {
@@ -102,10 +133,20 @@ export default Vue.extend({
   },
 
   methods: {
-    copyRate(event: any) {
-      setTextSync(event.item.value.trim());
+    copyRateFromListW(event: any) {
+      const value = event.item.value.trim() as string;
+      setTextSync(value);
+      this.showToast("Valor copiado!");
+    },
+
+    copyRate(value: string) {
+      setTextSync(value.trim());
+      this.showToast("Valor copiado!");
+    },
+
+    showToast(text: string) {
       const toast = new Toasty({
-        text: "Valor copiado!",
+        text,
         yAxisOffset: 20,
       }).setBackgroundColor("#656565");
       toast.show();
@@ -115,4 +156,20 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.list {
+  min-width: 400;
+}
+
+.item-label {
+  font-size: 16;
+}
+
+.item-value {
+  font-size: 22;
+  font-weight: bold;
+}
+
+.item-symbol {
+  font-size: 14;
+}
 </style>

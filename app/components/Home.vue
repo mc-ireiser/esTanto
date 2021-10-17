@@ -10,6 +10,7 @@
       width="360"
     >
       <GridLayout
+        v-if="screenHeight > 580"
         rows="auto, auto, auto, *"
         columns="*"
         margin="20"
@@ -41,13 +42,53 @@
           marginTop="10"
         ></RateList>
       </GridLayout>
+
+      <ScrollView v-else>
+        <GridLayout
+          rows="auto, auto, auto, *"
+          columns="*"
+          margin="10"
+          padding="10"
+        >
+          <StackLayout
+            row="0"
+            orientation="horizontal"
+            horizontalAlignment="right"
+            marginTop="10"
+          >
+            <StackLayout
+              class="icon-options"
+              marginRight="20"
+              @tap="showDisclaimerDialog()"
+            >
+              <Label
+                text.decode="&#xf12a; "
+                horizontalAlignment="center"
+                class="fas"
+              ></Label>
+            </StackLayout>
+          </StackLayout>
+          <UserInput row="1" marginTop="10" marginBottom="20"></UserInput>
+          <StatusIndicator row="2" v-if="multiplier"></StatusIndicator>
+          <RateList
+            row="3"
+            v-if="!loading && multiplier"
+            marginTop="10"
+          ></RateList>
+        </GridLayout>
+      </ScrollView>
     </PullToRefresh>
   </Page>
 </template>
 
 <script lang="ts">
 import Vue from "nativescript-vue";
-import { Http, Connectivity, ApplicationSettings } from "@nativescript/core";
+import {
+  Http,
+  Connectivity,
+  ApplicationSettings,
+  Screen,
+} from "@nativescript/core";
 import { mapGetters } from "vuex";
 import vibration from "~/utils/vibrate";
 import disclaimer from "~/utils/disclaimer";
@@ -87,6 +128,14 @@ export default Vue.extend({
       multiplier: "multiplier",
       loading: "loading",
     }),
+
+    screenWidth() {
+      return Screen.mainScreen.widthDIPs;
+    },
+
+    screenHeight() {
+      return Screen.mainScreen.heightDIPs;
+    },
   },
 
   methods: {
