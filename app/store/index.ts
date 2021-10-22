@@ -10,7 +10,7 @@ const store = new Vuex.Store({
     red: true,
     loading: false,
     from: "USD",
-    to: "VEF",
+    to: "VES",
     multiplier: 1,
     baseRates: {},
     timestamp: {}
