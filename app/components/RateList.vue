@@ -71,11 +71,11 @@ export default Vue.extend({
       baseRates: "baseRates",
     }),
 
-    screenWidth() {
+    screenWidth(): number {
       return Screen.mainScreen.widthDIPs;
     },
 
-    screenHeight() {
+    screenHeight(): number {
       return Screen.mainScreen.heightDIPs;
     },
 
@@ -132,18 +132,18 @@ export default Vue.extend({
   },
 
   methods: {
-    copyRateFromListW(event: any) {
+    copyRateFromListW(event: any): void {
       const value = event.item.value.trim() as string;
       setTextSync(value);
       this.showToast("Valor copiado!");
     },
 
-    copyRate(value: string) {
+    copyRate(value: string): void {
       setTextSync(value.trim());
       this.showToast("Valor copiado!");
     },
 
-    showToast(text: string) {
+    showToast(text: string): void {
       const toast = new Toasty({
         text,
         yAxisOffset: 20,

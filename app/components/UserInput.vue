@@ -82,22 +82,22 @@ export default Vue.extend({
   },
 
   methods: {
-    changeConversionOrder() {
+    changeConversionOrder(): void {
       this.vibrate();
       const aux = this.from;
       this.$store.commit(mutation_from, this.to);
       this.$store.commit(mutation_to, aux);
     },
 
-    updateMultiplier(args: any) {
+    updateMultiplier(args: any): void {
       this.$store.commit(mutation_multiplier, args.value);
     },
 
-    vibrate() {
+    vibrate(): void {
       vibration();
     },
 
-    clearInput() {
+    clearInput(): void {
       this.$store.commit(mutation_multiplier, "");
     },
   },

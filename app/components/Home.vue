@@ -102,6 +102,17 @@ import {
   mutation_timestamp,
 } from "~/store/mutationNames";
 
+interface IApiData {
+  _timestamp: {
+    epoch: string;
+    fecha: string;
+  };
+  USD: {
+    promedio_real: number;
+    dolartoday: number;
+  };
+}
+
 export default Vue.extend({
   components: {
     UserInput,
@@ -128,23 +139,23 @@ export default Vue.extend({
       loading: "loading",
     }),
 
-    screenWidth() {
+    screenWidth(): number {
       return Screen.mainScreen.widthDIPs;
     },
 
-    screenHeight() {
+    screenHeight(): number {
       return Screen.mainScreen.heightDIPs;
     },
   },
 
   methods: {
-    refresh(args: any) {
+    refresh(args: any): void {
       this.getApiData();
       var pullRefresh = args.object;
       pullRefresh.refreshing = false;
     },
 
-    async getApiData() {
+    async getApiData(): Promise<void> {
       const connectivityType = Connectivity.getConnectionType();
       if (!connectivityType) {
         this.$store.commit(mutation_red, false);
@@ -153,12 +164,12 @@ export default Vue.extend({
 
       this.$store.commit(mutation_loading, true);
       this.$store.commit(mutation_red, true);
-      const data: any = await Http.getJSON(API_URL);
+      const data: IApiData = await Http.getJSON(API_URL);
       this.processApidata(data);
       this.$store.commit(mutation_loading, false);
     },
 
-    processApidata(data: any) {
+    processApidata(data: IApiData): void {
       this.$store.commit(mutation_baseRates, {
         bcv: data.USD.promedio_real as number,
         dt: data.USD.dolartoday as number,
@@ -170,7 +181,7 @@ export default Vue.extend({
       });
     },
 
-    showDisclaimerDialog() {
+    showDisclaimerDialog(): void {
       vibration();
       disclaimer();
     },
@@ -180,7 +191,7 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 Page {
-  background-color: #6464641e; //  #bdc3c7;
+  background-color: #6464641e;
 }
 
 .icon-options {

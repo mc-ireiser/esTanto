@@ -4,16 +4,20 @@ export interface IStore {
   from: string;
   to: string;
   multiplier: number;
-  baseRates:
-    | {
-        ref: string;
-        value: string;
-      }
-    | {};
-  timestamp:
-    | {
-        epoch: string;
-        date: string;
-      }
-    | {};
+  baseRates: baseRatesType;
+  timestamp: timeStampType;
 }
+
+export type baseRatesType =
+  | {
+      ref: string;
+      value: string;
+    }
+  | {};
+
+export type timeStampType =
+  | {
+      epoch: string;
+      date: string;
+    }
+  | {};
