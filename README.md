@@ -17,9 +17,9 @@ Conversor monetario para Venezuela
 ## Preview:
 
 <p align="center" float="left">
-  <img src="https://user-images.githubusercontent.com/9746122/138514660-b6443bde-3227-4fe9-a42b-e78ed4660e7c.png" width="300" /> 
-  <img src="https://user-images.githubusercontent.com/9746122/138514652-88e7147b-b299-4932-9f01-c912adc2860e.png" width="300" />
-  <img src="https://user-images.githubusercontent.com/9746122/138513478-43fd49a8-3f0b-4a32-89b0-a064fb063270.png" width="300" />
+  <img src="https://user-images.githubusercontent.com/9746122/138514660-b6443bde-3227-4fe9-a42b-e78ed4660e7c.png" width="250" /> 
+  <img src="https://user-images.githubusercontent.com/9746122/138514652-88e7147b-b299-4932-9f01-c912adc2860e.png" width="250" />
+  <img src="https://user-images.githubusercontent.com/9746122/138513478-43fd49a8-3f0b-4a32-89b0-a064fb063270.png" width="250" />
 </p>
 
 [@NativeScript](https://github.com/NativeScript/NativeScript) #Hacktoberfest 2021
