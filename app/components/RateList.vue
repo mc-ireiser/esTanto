@@ -17,7 +17,6 @@
       </StackLayout>
     </v-template>
   </ListView>
-
   <StackLayout v-else marginBottom="30">
     <StackLayout
       v-for="(item, index) in calculatedRates"

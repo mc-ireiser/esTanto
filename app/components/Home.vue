@@ -42,7 +42,6 @@
           marginTop="10"
         ></RateList>
       </GridLayout>
-
       <ScrollView v-else>
         <GridLayout
           rows="auto, auto, auto, *"
