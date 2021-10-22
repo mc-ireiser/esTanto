@@ -1,4 +1,8 @@
-# esTanto
+# esTanto 
+
+Android version - [PlayStore](https://play.google.com/store/apps/details?id=me.ireiser.estanto)
+
+# Data:
 
 Conversor monetario para Venezuela
 
