@@ -131,15 +131,6 @@ export default Vue.extend({
     this.getApiData();
   },
 
-  mounted() {
-    if (
-      !ApplicationSettings.hasKey("tos") ||
-      !ApplicationSettings.getBoolean("tos")
-    ) {
-      this.showDisclaimerDialog();
-    }
-  },
-
   computed: {
     ...mapGetters({
       multiplier: "multiplier",
@@ -174,6 +165,10 @@ export default Vue.extend({
       const data: IApiData = await Http.getJSON(API_URL);
       this.processApidata(data);
       this.$store.commit(mutation_loading, false);
+
+      if (!ApplicationSettings.hasKey("tos")) {
+        this.showDisclaimerDialog();
+      }
     },
 
     processApidata(data: IApiData): void {
