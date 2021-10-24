@@ -4,19 +4,19 @@ Android version - [PlayStore](https://play.google.com/store/apps/details?id=me.i
 
 # Data:
 
-Conversor monetario para Venezuela
+Currency converter for Venezuela
 
-- Conversión entre USD y VES
-- Doble toque para limpiar el área de entrada
-- Toque simple para copiar el valor de la conversión al portapapeles
-- Soporte para pantallas pequeñas
-- Soporte para tablet 7"
+- Conversion between USD and VES
+- Double tap to clear input box
+- Simple tap to copy conversion value to clipboard
+- Small screen support
+- Tablet support
 
 ## Todo:
 
-- Mejorar en tablet 10"
-- [Agregar animaciones?](https://docs.nativescript.org/interaction.html)
-- [Crear temas?](https://blog.nativescript.org/dynamically-swap-themes-with-theme-switcher/index.html)
+- Improve the size of items on Tablet.
+- [Add animations?](https://docs.nativescript.org/interaction.html)
+- [Add screen themes?](https://blog.nativescript.org/dynamically-swap-themes-with-theme-switcher/index.html)
 
 ## Preview:
 
