@@ -9,6 +9,7 @@ Currency converter for Venezuela
 - Conversion between USD and VES
 - Double tap to clear input box
 - Simple tap to copy conversion value to clipboard
+- Pull to refresh
 - Small screen support
 - Tablet support
 
