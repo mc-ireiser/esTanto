@@ -1,6 +1,6 @@
 <template>
   <ListView
-    v-if="!loading && red && screenHeight > 580"
+    v-if="!loading && red && screenHeight > minScreenHeight"
     for="item in calculatedRates"
     class="list"
     @itemTap="copyRateFromListW"
@@ -46,6 +46,7 @@ import { mapGetters } from "vuex";
 import { setTextSync } from "nativescript-clipboard";
 import { Toasty } from "@triniwiz/nativescript-toasty";
 import { Screen } from "@nativescript/core";
+import { minScreenHeight } from "~/data/globals";
 
 type rateType = {
   ref: string;
@@ -61,6 +62,12 @@ const currencyFormat = {
 };
 
 export default Vue.extend({
+  data() {
+    return {
+      minScreenHeight: minScreenHeight,
+    };
+  },
+
   computed: {
     ...mapGetters({
       red: "red",

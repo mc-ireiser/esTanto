@@ -10,7 +10,7 @@
       width="360"
     >
       <GridLayout
-        v-if="screenHeight > 580"
+        v-if="screenHeight > minScreenHeight"
         rows="auto, auto, auto, *"
         columns="*"
         margin="20"
@@ -95,6 +95,7 @@ import UserInput from "./UserInput.vue";
 import RateList from "./RateList.vue";
 import StatusIndicator from "./StatusIndicator.vue";
 import API_URL from "~/data/api";
+import { minScreenHeight } from "~/data/globals";
 import {
   mutation_red,
   mutation_loading,
@@ -118,6 +119,12 @@ export default Vue.extend({
     UserInput,
     RateList,
     StatusIndicator,
+  },
+
+  data() {
+    return {
+      minScreenHeight: minScreenHeight,
+    };
   },
 
   created() {
